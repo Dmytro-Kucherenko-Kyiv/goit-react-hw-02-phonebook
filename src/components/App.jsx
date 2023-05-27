@@ -1,11 +1,20 @@
 import { Component } from "react";
+import { nanoid } from 'nanoid';
+import { Filter } from "./Filter/Filter";
+import { ContactList } from "./ContactList/ContactList";
 
 export class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      contacts: [],
+      contacts: [
+        {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      ],
+      filter: '',
       name: '',
       number: ''
     }
@@ -17,21 +26,51 @@ export class App extends Component {
     })
   }
 
-  handlePhonebookAdd = e => {
-    this.setState(
-      (prevState) => ({
-        contacts: prevState.contacts.push(e)
-      })
-    )
+  resetForm = e => {
+    this.setState({
+      name: '',
+      number: ''
+    })
   }
+
+/*   addUser = newUser => {
+    this.setState(prevState => {
+      contacts: [...prevState.contacts, newUser ]
+    });
+  } */
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
-    /* console.log(Object.values(this.state).slice(-2).join(" ")); */
+
+    this.setState({ contacts: [...this.state.contacts, { ...this.state, id: nanoid() }] });
+
+
+    this.resetForm()
+
   }
 
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value })    
+  }
+
+/*   visibleUsers = e => {
+
+    const normalaizedFilter = this.state.filter.toLowerCase();
+
+    const visibleUser = this.state.contacts.filter(
+      contact => contact.includes(normalaizedFilter))
+  }
+ */
+
+
   render() {
+
+/*     const { filter } = this.state;
+
+    const visibleContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    ); */
+
     return (
       <div
         style={{
@@ -46,10 +85,12 @@ export class App extends Component {
       >
 
         <h1>Phonebook</h1>
-        
-        <form onSubmit={this.handleSubmit}>
+{/*         <ContactForm
+          onSubmit={this.handleSubmit}
+        /> */}
+        <form onSubmit={this.handleSubmit} /* createUser={this.createUser} */>
           
-          <label /* title="Name" */ htmlFor="number"> Name
+          <label htmlFor="name"> Name
             
             <input
               value={this.state.name}
@@ -62,7 +103,7 @@ export class App extends Component {
             />
           </label>
 
-          <label /* title="Name" */ htmlFor="tel"> Number
+          <label htmlFor="number"> Number
             
             <input
               value={this.state.number}
@@ -80,56 +121,13 @@ export class App extends Component {
         </form>
 
         <h2>Contacts</h2>
-
-        <ul>
-{/*           {this.state.contacts.map((contact, index) =>
-            <li
-              key={index}
-
-            >
-
-            </li>)} */}
-        </ul>
+        <Filter
+          value={this.state.filter}
+          onChange={this.changeFilter}
+        />
+        <ContactList users={this.state.contacts} />
       </div>
     )
   }
 
 }
-
-
-/* export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      <h1>Phonebook</h1>
-      <form>
-        <label htmlFor="number"> Name
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <button type="submit">Add contact</button>
-      </label>
-      </form>
-
-      <h2>Contacts</h2>
-      <ul>
-        <li>
-          
-        </li>
-      </ul>
-      React homework template
-    </div>
-  );
-}; */
