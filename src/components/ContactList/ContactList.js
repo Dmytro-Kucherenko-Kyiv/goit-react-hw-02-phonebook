@@ -1,17 +1,29 @@
-/* import { DeleteBtn } from "components/ContactItem/ContactItem"; */
+import PropTypes from 'prop-types';
+import { DeleteButton, Item, ItemStyle, List } from "./ContactList.styled";
 
-import { Item, ItemStyle, List } from "./ContactList.styled";
+export const ContactList = ({ users, filter, onDelete }) => (
 
-export const ContactList = ({ users }) => (
-  <List /* value={visibleUsers} */>
+  <List>
     {users.map((user) => 
-      /* this.props.contacts.}includes(user.name) ? alert(`${user.name} is already in contacts!`) : */
+    ( filter ==="" || user.name.toLowerCase().includes(filter.toLowerCase()) ) &&
       <Item key={user.id}>
-        <ItemStyle/>
-        {user.name} : {user.number}
-        
-        <button type="button">Delete</button>
+        <ItemStyle />
 
+        {user.name} : {user.number}
+
+        <DeleteButton type="button" onClick={() => onDelete(user.id)}>Delete</DeleteButton>
       </Item>)}
   </List>
 )
+
+ContactList.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+  filter: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};

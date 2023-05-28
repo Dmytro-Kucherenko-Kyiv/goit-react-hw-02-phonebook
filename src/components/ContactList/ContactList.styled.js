@@ -19,16 +19,18 @@ export const ItemStyle = styled.span`
   padding-inline-start: 1ch;
 `
 
-export const ButtonDelete = styled.button`
-  font-size: 20px;
-  padding: 7px;
-  /* color: ${p => p.theme.colors.text}; */
-  /* background-color: ${p => p.theme.colors.buttonColor}; */
-  border-radius: 50% 20% / 10% 40%;
+export const DeleteButton = styled.button`
+  font-size: 15px;
+  padding: 5px;
+  color: ${p => p.theme.colors.text};
+  background-color: ${p => p.theme.colors.buttonColor};
+  border: 1mm solid ${p => p.theme.colors.text};
+  border-radius: 20px;
   cursor:pointer;
 
   &:hover {
     color:  ${p => p.theme.colors.textAccent};
-    /* background-color: ${p => p.theme.colors.text}; */
+    background-color: ${p => p.theme.colors.text};
+    border-color: ${p => p.theme.colors.textAccent};
   }
 `

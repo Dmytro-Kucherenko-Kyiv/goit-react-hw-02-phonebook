@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import { Input, Label, LabelWrap } from "./Filter.styled";
 
-export const Filter = ({ value, onChange, visibleContacts }) => {
+export const Filter = ({ value, onChange }) => {
 
   return (
 
@@ -14,4 +15,9 @@ export const Filter = ({ value, onChange, visibleContacts }) => {
       </Label>
     </LabelWrap>
   )
+}
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 }

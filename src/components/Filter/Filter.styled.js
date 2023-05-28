@@ -6,21 +6,21 @@ export const LabelWrap = styled.div`
 
 export const Label = styled.label`
   font-size: 30px;
-  color: tomato;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 `
 
 export const Input = styled.input`
   cursor: pointer;
   font-size: 20px;
   text-align: center;
-  color: tomato;
-  border: 1mm inset #c3f5bf;
+  color: ${p => p.theme.colors.text};
+  border: 1mm solid ${p => p.theme.colors.text};
   border-radius: 20px;
+  background-color: ${p => p.theme.colors.buttonColor};
 
   &:hover, &:focus{
-    border: 1mm inset tomato;
+    border-color: ${p => p.theme.colors.textAccent};
   }
 `
