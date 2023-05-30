@@ -15,13 +15,6 @@ export class App extends Component {
     }
   }
 
-  resetForm = () => {
-    this.setState({
-      name: '',
-      number: ''
-    })
-  }
-
   handleSubmit = e => {
     e.preventDefault();
 
@@ -39,8 +32,6 @@ export class App extends Component {
         }]
       });
     }
-
-    this.resetForm()
   }
 
   changeFilter = e => {

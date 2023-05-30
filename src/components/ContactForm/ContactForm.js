@@ -18,10 +18,16 @@ export class ContactForm extends Component {
     })
   }
 
+    resetForm = () => {
+    this.setState({
+      name: '',
+      number: ''
+    })
+  }
 
   render() {
     return (
-    <Form onSubmit={this.props.onSubmit}>
+      <Form onSubmit={(e) => { e.preventDefault(); this.props.onSubmit(e); this.resetForm() }}>
 
       <Label htmlFor="name"> Name
 
