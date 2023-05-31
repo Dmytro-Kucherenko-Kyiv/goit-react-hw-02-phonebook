@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import { DeleteButton, Item, ItemStyle, List } from "./ContactList.styled";
 
-export const ContactList = ({ users, filter, onDelete }) => (
+export const ContactList = ({ users, onDelete }) => (
 
   <List>
     {users.map((user) => 
-    ( filter ==="" || user.name.toLowerCase().includes(filter.toLowerCase()) ) &&
       <Item key={user.id}>
         <ItemStyle />
 
@@ -24,6 +23,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     }).isRequired
   ),
-  filter: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
